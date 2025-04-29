@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Prédiction de Segment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900">
+
+<section class="py-10 sm:py-16 lg:py-24">
+    <div class="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
+            <!-- Left block with text -->
+            <div class="flex flex-col justify-between text-white">
+                <div>
+                    <h2 class="text-3xl font-bold sm:text-4xl lg:text-5xl">Prédisez votre segment client</h2>
+                    <p class="mt-4 max-w-xl text-base">Entrez vos informations ci-dessous pour obtenir votre classification selon notre modèle de segmentation client.</p>
+                </div>
+                <!-- Testimonial (facultatif, décoratif) -->
+                <blockquote class="mt-10 text-white hidden md:block">
+                    <p class="text-lg italic">"Cet outil m'a permis de mieux comprendre mes clients. Simple, rapide et efficace !"</p>
+                    <footer class="mt-4 flex items-center">
+                        <img class="w-10 h-10 rounded-full" src="{% static 'images/lolo.jpg' %}" alt="Avatar">
+
+                        <div class="ml-4">
+                            <p class="font-semibold">Ndeye khady gueye</p>
+                            <p class="text-sm text-gray-300">Responsable marketing</p>
+                        </div>
+                    </footer>
+                </blockquote>
+            </div>
+
+            <!-- Right block with the form -->
+            <div class="bg-white p-8 rounded-md shadow-md">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Remplissez le formulaire</h3>
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Âge</label>
+                        <input type="number" name="age" required placeholder="Entrez votre âge"
+                               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Revenu annuel</label>
+                        <input type="number" name="revenu" required placeholder="Entrez votre revenu annuel"
+                               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Score d'achat</label>
+                        <input type="number" name="score" required placeholder="Entrez votre score d'achat"
+                               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+
+                    <div>
+                        <button type="submit"
+                                class="w-full py-3 px-4 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition duration-300">
+                            Prédire mon segment
+                        </button>
+                    </div>
+                </form>
+
+                {% if segment %}
+                    <div class="mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                        <strong>Segment prédit :</strong> {{ segment }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
